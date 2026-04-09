@@ -1,0 +1,52 @@
+RUN DEBUG
+COOLDOWNS / DEBUG
+pointerLock: locked
+player: x 0  y 0  z -5.51
+moveSpeed: 8.9 m/s
+verticalSpeed: 0 m/s
+grounded: true
+cameraYaw: 0
+cameraPitch: -0.16
+visual: fastMove:loop
+
+swing cd: 0.00
+thrust cd: 0.00
+burst cd: 0.00
+vault cd: 0.00
+wheel cd: 0.00
+dragon cd: 0.00
+
+dummy-1: 100% 
+dummy-2: 100% 
+dummy-3: 100% 
+---
+SWING HUD
+FIRE SPEAR DUELIST
+
+Health 200 / 200
+
+State: swing:startup
+
+Burning Thrust idle
+---
+FINAL DEBUG
+COOLDOWNS / DEBUG
+pointerLock: locked
+player: x 0  y 0  z -3.44
+moveSpeed: 0 m/s
+verticalSpeed: 0 m/s
+grounded: true
+cameraYaw: 0
+cameraPitch: -0.16
+visual: idle:loop
+
+swing cd: 0.00
+thrust cd: 0.00
+burst cd: 0.00
+vault cd: 0.00
+wheel cd: 0.00
+dragon cd: 0.00
+
+dummy-1: 100% 
+dummy-2: 100% 
+dummy-3: 100% 

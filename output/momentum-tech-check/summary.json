@@ -1,0 +1,550 @@
+{
+  "boosted": {
+    "startState": {
+      "coordinateSystem": "Three.js world, +x east, +y up, +z north from blue spawn toward red spawn",
+      "player": {
+        "x": 0,
+        "y": 0,
+        "z": -11.5,
+        "facingYaw": 0,
+        "grounded": true,
+        "moveSpeed": 0,
+        "verticalSpeed": 0,
+        "health": 100,
+        "action": "Ready",
+        "charge": 0
+      },
+      "camera": {
+        "yaw": 0,
+        "pitch": -0.16
+      },
+      "arrows": [
+        {
+          "x": -2.07,
+          "y": 1.38,
+          "z": 4.04
+        }
+      ],
+      "dummies": [
+        {
+          "id": "dummy-1",
+          "alive": true,
+          "x": 5.8,
+          "z": 1.6,
+          "healthRatio": 1,
+          "statuses": []
+        },
+        {
+          "id": "dummy-2",
+          "alive": true,
+          "x": -5.8,
+          "z": 1.6,
+          "healthRatio": 1,
+          "statuses": []
+        },
+        {
+          "id": "dummy-3",
+          "alive": true,
+          "x": 0,
+          "z": 5.2,
+          "healthRatio": 1,
+          "statuses": []
+        },
+        {
+          "id": "dummy-4",
+          "alive": true,
+          "x": -11.3,
+          "z": 0,
+          "healthRatio": 1,
+          "statuses": []
+        },
+        {
+          "id": "dummy-5",
+          "alive": true,
+          "x": 11.3,
+          "z": 0,
+          "healthRatio": 1,
+          "statuses": []
+        }
+      ],
+      "playerStatuses": []
+    },
+    "landingState": {
+      "coordinateSystem": "Three.js world, +x east, +y up, +z north from blue spawn toward red spawn",
+      "player": {
+        "x": 9.49,
+        "y": 0,
+        "z": -11.5,
+        "facingYaw": 0,
+        "grounded": true,
+        "moveSpeed": 22.12,
+        "verticalSpeed": -0.57,
+        "health": 100,
+        "action": "Ready",
+        "charge": 0
+      },
+      "camera": {
+        "yaw": 0,
+        "pitch": -0.16
+      },
+      "arrows": [
+        {
+          "x": -6.49,
+          "y": -2.76,
+          "z": 38.73
+        }
+      ],
+      "dummies": [
+        {
+          "id": "dummy-1",
+          "alive": true,
+          "x": 5.8,
+          "z": 1.6,
+          "healthRatio": 1,
+          "statuses": []
+        },
+        {
+          "id": "dummy-2",
+          "alive": true,
+          "x": -5.8,
+          "z": 1.6,
+          "healthRatio": 1,
+          "statuses": []
+        },
+        {
+          "id": "dummy-3",
+          "alive": true,
+          "x": 0,
+          "z": 5.2,
+          "healthRatio": 1,
+          "statuses": []
+        },
+        {
+          "id": "dummy-4",
+          "alive": true,
+          "x": -11.3,
+          "z": 0,
+          "healthRatio": 1,
+          "statuses": []
+        },
+        {
+          "id": "dummy-5",
+          "alive": true,
+          "x": 11.3,
+          "z": 0,
+          "healthRatio": 1,
+          "statuses": []
+        }
+      ],
+      "playerStatuses": [
+        "momentum:0.14"
+      ]
+    },
+    "preJumpState": {
+      "coordinateSystem": "Three.js world, +x east, +y up, +z north from blue spawn toward red spawn",
+      "player": {
+        "x": 12.46,
+        "y": 0,
+        "z": -11.5,
+        "facingYaw": 0,
+        "grounded": true,
+        "moveSpeed": 2.52,
+        "verticalSpeed": -0.01,
+        "health": 100,
+        "action": "Ready",
+        "charge": 0
+      },
+      "camera": {
+        "yaw": 0,
+        "pitch": -0.16
+      },
+      "arrows": [],
+      "dummies": [
+        {
+          "id": "dummy-1",
+          "alive": true,
+          "x": 5.8,
+          "z": 1.6,
+          "healthRatio": 1,
+          "statuses": []
+        },
+        {
+          "id": "dummy-2",
+          "alive": true,
+          "x": -5.8,
+          "z": 1.6,
+          "healthRatio": 1,
+          "statuses": []
+        },
+        {
+          "id": "dummy-3",
+          "alive": true,
+          "x": 0,
+          "z": 5.2,
+          "healthRatio": 1,
+          "statuses": []
+        },
+        {
+          "id": "dummy-4",
+          "alive": true,
+          "x": -11.3,
+          "z": 0,
+          "healthRatio": 1,
+          "statuses": []
+        },
+        {
+          "id": "dummy-5",
+          "alive": true,
+          "x": 11.3,
+          "z": 0,
+          "healthRatio": 1,
+          "statuses": []
+        }
+      ],
+      "playerStatuses": []
+    },
+    "afterJumpState": {
+      "coordinateSystem": "Three.js world, +x east, +y up, +z north from blue spawn toward red spawn",
+      "player": {
+        "x": 12.91,
+        "y": 1.45,
+        "z": -11.5,
+        "facingYaw": 0,
+        "grounded": false,
+        "moveSpeed": 0.49,
+        "verticalSpeed": -0.53,
+        "health": 100,
+        "action": "Ready",
+        "charge": 0
+      },
+      "camera": {
+        "yaw": 0,
+        "pitch": -0.16
+      },
+      "arrows": [],
+      "dummies": [
+        {
+          "id": "dummy-1",
+          "alive": true,
+          "x": 5.8,
+          "z": 1.6,
+          "healthRatio": 1,
+          "statuses": []
+        },
+        {
+          "id": "dummy-2",
+          "alive": true,
+          "x": -5.8,
+          "z": 1.6,
+          "healthRatio": 1,
+          "statuses": []
+        },
+        {
+          "id": "dummy-3",
+          "alive": true,
+          "x": 0,
+          "z": 5.2,
+          "healthRatio": 1,
+          "statuses": []
+        },
+        {
+          "id": "dummy-4",
+          "alive": true,
+          "x": -11.3,
+          "z": 0,
+          "healthRatio": 1,
+          "statuses": []
+        },
+        {
+          "id": "dummy-5",
+          "alive": true,
+          "x": 11.3,
+          "z": 0,
+          "healthRatio": 1,
+          "statuses": []
+        }
+      ],
+      "playerStatuses": []
+    },
+    "jumpDelayAfterLandingMs": 45,
+    "horizontalTravelFromLanding": 3.42,
+    "horizontalTravelFromJump": 0.45,
+    "moveSpeedAfterJump": 0.49,
+    "verticalSpeedAfterJump": -0.53
+  },
+  "late": {
+    "startState": {
+      "coordinateSystem": "Three.js world, +x east, +y up, +z north from blue spawn toward red spawn",
+      "player": {
+        "x": 0,
+        "y": 0,
+        "z": -11.5,
+        "facingYaw": 0,
+        "grounded": true,
+        "moveSpeed": 0,
+        "verticalSpeed": 0,
+        "health": 100,
+        "action": "Ready",
+        "charge": 0
+      },
+      "camera": {
+        "yaw": 0,
+        "pitch": -0.16
+      },
+      "arrows": [
+        {
+          "x": -2.2,
+          "y": 1.35,
+          "z": 5.03
+        }
+      ],
+      "dummies": [
+        {
+          "id": "dummy-1",
+          "alive": true,
+          "x": 5.8,
+          "z": 1.6,
+          "healthRatio": 1,
+          "statuses": []
+        },
+        {
+          "id": "dummy-2",
+          "alive": true,
+          "x": -5.8,
+          "z": 1.6,
+          "healthRatio": 1,
+          "statuses": []
+        },
+        {
+          "id": "dummy-3",
+          "alive": true,
+          "x": 0,
+          "z": 5.2,
+          "healthRatio": 1,
+          "statuses": []
+        },
+        {
+          "id": "dummy-4",
+          "alive": true,
+          "x": -11.3,
+          "z": 0,
+          "healthRatio": 1,
+          "statuses": []
+        },
+        {
+          "id": "dummy-5",
+          "alive": true,
+          "x": 11.3,
+          "z": 0,
+          "healthRatio": 1,
+          "statuses": []
+        }
+      ],
+      "playerStatuses": []
+    },
+    "landingState": {
+      "coordinateSystem": "Three.js world, +x east, +y up, +z north from blue spawn toward red spawn",
+      "player": {
+        "x": 10.02,
+        "y": 0,
+        "z": -11.5,
+        "facingYaw": 0,
+        "grounded": true,
+        "moveSpeed": 22.12,
+        "verticalSpeed": -0.57,
+        "health": 100,
+        "action": "Ready",
+        "charge": 0
+      },
+      "camera": {
+        "yaw": 0,
+        "pitch": -0.16
+      },
+      "arrows": [
+        {
+          "x": -6.61,
+          "y": -2.97,
+          "z": 39.72
+        }
+      ],
+      "dummies": [
+        {
+          "id": "dummy-1",
+          "alive": true,
+          "x": 5.8,
+          "z": 1.6,
+          "healthRatio": 1,
+          "statuses": []
+        },
+        {
+          "id": "dummy-2",
+          "alive": true,
+          "x": -5.8,
+          "z": 1.6,
+          "healthRatio": 1,
+          "statuses": []
+        },
+        {
+          "id": "dummy-3",
+          "alive": true,
+          "x": 0,
+          "z": 5.2,
+          "healthRatio": 1,
+          "statuses": []
+        },
+        {
+          "id": "dummy-4",
+          "alive": true,
+          "x": -11.3,
+          "z": 0,
+          "healthRatio": 1,
+          "statuses": []
+        },
+        {
+          "id": "dummy-5",
+          "alive": true,
+          "x": 11.3,
+          "z": 0,
+          "healthRatio": 1,
+          "statuses": []
+        }
+      ],
+      "playerStatuses": [
+        "momentum:0.14"
+      ]
+    },
+    "preJumpState": {
+      "coordinateSystem": "Three.js world, +x east, +y up, +z north from blue spawn toward red spawn",
+      "player": {
+        "x": 13.34,
+        "y": 0,
+        "z": -11.5,
+        "facingYaw": 0,
+        "grounded": true,
+        "moveSpeed": 0.91,
+        "verticalSpeed": 0,
+        "health": 100,
+        "action": "Ready",
+        "charge": 0
+      },
+      "camera": {
+        "yaw": 0,
+        "pitch": -0.16
+      },
+      "arrows": [],
+      "dummies": [
+        {
+          "id": "dummy-1",
+          "alive": true,
+          "x": 5.8,
+          "z": 1.6,
+          "healthRatio": 1,
+          "statuses": []
+        },
+        {
+          "id": "dummy-2",
+          "alive": true,
+          "x": -5.8,
+          "z": 1.6,
+          "healthRatio": 1,
+          "statuses": []
+        },
+        {
+          "id": "dummy-3",
+          "alive": true,
+          "x": 0,
+          "z": 5.2,
+          "healthRatio": 1,
+          "statuses": []
+        },
+        {
+          "id": "dummy-4",
+          "alive": true,
+          "x": -11.3,
+          "z": 0,
+          "healthRatio": 1,
+          "statuses": []
+        },
+        {
+          "id": "dummy-5",
+          "alive": true,
+          "x": 11.3,
+          "z": 0,
+          "healthRatio": 1,
+          "statuses": []
+        }
+      ],
+      "playerStatuses": []
+    },
+    "afterJumpState": {
+      "coordinateSystem": "Three.js world, +x east, +y up, +z north from blue spawn toward red spawn",
+      "player": {
+        "x": 13.5,
+        "y": 1.46,
+        "z": -11.5,
+        "facingYaw": 0,
+        "grounded": false,
+        "moveSpeed": 0.2,
+        "verticalSpeed": -0.07,
+        "health": 100,
+        "action": "Ready",
+        "charge": 0
+      },
+      "camera": {
+        "yaw": 0,
+        "pitch": -0.16
+      },
+      "arrows": [],
+      "dummies": [
+        {
+          "id": "dummy-1",
+          "alive": true,
+          "x": 5.8,
+          "z": 1.6,
+          "healthRatio": 1,
+          "statuses": []
+        },
+        {
+          "id": "dummy-2",
+          "alive": true,
+          "x": -5.8,
+          "z": 1.6,
+          "healthRatio": 1,
+          "statuses": []
+        },
+        {
+          "id": "dummy-3",
+          "alive": true,
+          "x": 0,
+          "z": 5.2,
+          "healthRatio": 1,
+          "statuses": []
+        },
+        {
+          "id": "dummy-4",
+          "alive": true,
+          "x": -11.3,
+          "z": 0,
+          "healthRatio": 1,
+          "statuses": []
+        },
+        {
+          "id": "dummy-5",
+          "alive": true,
+          "x": 11.3,
+          "z": 0,
+          "healthRatio": 1,
+          "statuses": []
+        }
+      ],
+      "playerStatuses": []
+    },
+    "jumpDelayAfterLandingMs": 260,
+    "horizontalTravelFromLanding": 3.48,
+    "horizontalTravelFromJump": 0.16,
+    "moveSpeedAfterJump": 0.2,
+    "verticalSpeedAfterJump": -0.07
+  },
+  "boostedVsLateTravelDelta": 0.29,
+  "boostedVsLateMoveSpeedDelta": 0.29
+}

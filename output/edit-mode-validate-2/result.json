@@ -1,0 +1,123 @@
+{
+  "initialState": {
+    "enabled": true,
+    "selectedName": null,
+    "gizmoMode": "translate",
+    "moveSpeed": 10,
+    "freelookActive": false,
+    "cameraPosition": {
+      "x": 1.05,
+      "y": 4.477,
+      "z": -18.484
+    },
+    "cameraRotation": {
+      "x": -0.158,
+      "y": -0.137,
+      "z": 0
+    }
+  },
+  "selection": null,
+  "rotateState": {
+    "enabled": true,
+    "selectedName": null,
+    "gizmoMode": "rotate",
+    "moveSpeed": 10,
+    "freelookActive": false,
+    "cameraPosition": {
+      "x": 1.05,
+      "y": 4.477,
+      "z": -18.484
+    },
+    "cameraRotation": {
+      "x": -0.158,
+      "y": -0.137,
+      "z": 0
+    }
+  },
+  "scaleState": {
+    "enabled": true,
+    "selectedName": null,
+    "gizmoMode": "scale",
+    "moveSpeed": 10,
+    "freelookActive": false,
+    "cameraPosition": {
+      "x": 1.05,
+      "y": 4.477,
+      "z": -18.484
+    },
+    "cameraRotation": {
+      "x": -0.158,
+      "y": -0.137,
+      "z": 0
+    }
+  },
+  "exportEntryCount": 20,
+  "movingState": {
+    "enabled": true,
+    "selectedName": null,
+    "gizmoMode": "translate",
+    "moveSpeed": 10,
+    "freelookActive": true,
+    "cameraPosition": {
+      "x": -20.509,
+      "y": 4.477,
+      "z": -7.435
+    },
+    "cameraRotation": {
+      "x": 0.418,
+      "y": -1.097,
+      "z": 0
+    }
+  },
+  "finalState": {
+    "enabled": true,
+    "selectedName": null,
+    "gizmoMode": "translate",
+    "moveSpeed": 10,
+    "freelookActive": false,
+    "cameraPosition": {
+      "x": -21.439,
+      "y": 4.477,
+      "z": -6.958
+    },
+    "cameraRotation": {
+      "x": 0.418,
+      "y": -1.097,
+      "z": 0
+    }
+  },
+  "consoleMessages": [
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x57dc00fadc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x57dc00fadc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x57dc00fadc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x57dc00fadc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+FIRE SPEAR DUELIST
+
+Health 200 / 200
+
+State: swing:active
+
+Burning Thrust idle
+---
+FIRE SPEAR DUELIST
+
+Health 200 / 200
+
+State: Ready
+
+Burning Thrust idle
+---
+FIRE SPEAR DUELIST
+
+Health 200 / 200
+
+State: Ready
+
+Burning Thrust idle

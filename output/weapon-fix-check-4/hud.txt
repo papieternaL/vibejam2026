@@ -1,0 +1,7 @@
+FIRE SPEAR DUELIST
+
+Health 200 / 200
+
+State: swing:recovery
+
+Burning Thrust idle

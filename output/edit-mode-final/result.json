@@ -1,0 +1,160 @@
+{
+  "initialState": {
+    "enabled": true,
+    "selectedName": null,
+    "gizmoMode": "translate",
+    "moveSpeed": 10,
+    "freelookActive": false,
+    "cameraPosition": {
+      "x": 1.05,
+      "y": 4.477,
+      "z": -18.475
+    },
+    "cameraRotation": {
+      "x": -0.158,
+      "y": -0.137,
+      "z": 0
+    }
+  },
+  "selectedState": {
+    "enabled": true,
+    "selectedName": null,
+    "gizmoMode": "translate",
+    "moveSpeed": 10,
+    "freelookActive": false,
+    "cameraPosition": {
+      "x": 1.05,
+      "y": 4.477,
+      "z": -18.475
+    },
+    "cameraRotation": {
+      "x": -0.158,
+      "y": -0.137,
+      "z": 0
+    }
+  },
+  "rotateState": {
+    "enabled": true,
+    "selectedName": null,
+    "gizmoMode": "rotate",
+    "moveSpeed": 10,
+    "freelookActive": false,
+    "cameraPosition": {
+      "x": 1.05,
+      "y": 4.477,
+      "z": -18.475
+    },
+    "cameraRotation": {
+      "x": -0.158,
+      "y": -0.137,
+      "z": 0
+    }
+  },
+  "scaleState": {
+    "enabled": true,
+    "selectedName": null,
+    "gizmoMode": "scale",
+    "moveSpeed": 10,
+    "freelookActive": false,
+    "cameraPosition": {
+      "x": 1.05,
+      "y": 4.477,
+      "z": -18.475
+    },
+    "cameraRotation": {
+      "x": -0.158,
+      "y": -0.137,
+      "z": 0
+    }
+  },
+  "speedState": {
+    "enabled": true,
+    "selectedName": null,
+    "gizmoMode": "translate",
+    "moveSpeed": 11.5,
+    "freelookActive": false,
+    "cameraPosition": {
+      "x": 1.05,
+      "y": 4.477,
+      "z": -18.475
+    },
+    "cameraRotation": {
+      "x": -0.158,
+      "y": -0.137,
+      "z": 0
+    }
+  },
+  "movingState": {
+    "enabled": true,
+    "selectedName": null,
+    "gizmoMode": "translate",
+    "moveSpeed": 11.5,
+    "freelookActive": true,
+    "cameraPosition": {
+      "x": -10.951,
+      "y": 4.477,
+      "z": -12.325
+    },
+    "cameraRotation": {
+      "x": 0.418,
+      "y": -1.097,
+      "z": 0
+    }
+  },
+  "finalState": {
+    "enabled": true,
+    "selectedName": null,
+    "gizmoMode": "translate",
+    "moveSpeed": 11.5,
+    "freelookActive": false,
+    "cameraPosition": {
+      "x": -11.897,
+      "y": 4.477,
+      "z": -11.84
+    },
+    "cameraRotation": {
+      "x": 0.418,
+      "y": -1.097,
+      "z": 0
+    }
+  },
+  "exportEntryCount": 20,
+  "consoleMessages": [
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x1a2c00ee2a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x1a2c00ee2a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x1a2c00ee2a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x1a2c00ee2a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+    },
+    {
+      "type": "log",
+      "text": "[\n  {\n    \"name\": \"arena-floor\",\n    \"position\": {\n      \"x\": 0,\n      \"y\": -0.5,\n      \"z\": 0\n    },\n    \"rotation\": {\n      \"x\": 0,\n      \"y\": 0,\n      \"z\": 0\n    },\n    \"scale\": {\n      \"x\": 1,\n      \"y\": 1,\n      \"z\": 1\n    }\n  },\n  {\n    \"name\": \"platform-2\",\n    \"position\": {\n      \"x\": -12.25,\n      \"y\": 0.875,\n      \"z\": 0\n    },\n    \"rotation\": {\n      \"x\": 0,\n      \"y\": 0,\n      \"z\": 0\n    },\n    \"scale\": {\n      \"x\": 1,\n      \"y\": 1,\n      \"z\": 1\n    }\n  },\n  {\n    \"name\": \"platform-3\",\n    \"position\": {\n      \"x\": 12.25,\n      \"y\": 0.875,\n      \"z\": 0\n    },\n    \"rotation\": {\n      \"x\": 0,\n      \"y\": 0,\n      \"z\": 0\n    },\n    \"scale\": {\n      \"x\": 1,\n      \"y\": 1,\n      \"z\": 1\n    }\n  },\n  {\n    \"name\": \"ramp-4\",\n    \"position\": {\n      \"x\": -7.75,\n      \"y\": 0.875,\n      \"z\": 0\n    },\n    \"rotation\": {\n      \"x\": 0,\n      \"y\": 0,\n      \"z\": 0.371\n    },\n    \"scale\": {\n      \"x\": 1,\n      \"y\": 1,\n      \"z\": 1\n    }\n  },\n  {\n    \"name\": \"ramp-5\",\n    \"position\": {\n      \"x\": 7.75,\n      \"y\": 0.875,\n      \"z\": 0\n    },\n    \"rotation\": {\n      \"x\": 0,\n      \"y\": 0,\n      \"z\": -0.371\n    },\n    \"scale\": {\n      \"x\": 1,\n      \"y\": 1,\n      \"z\": 1\n    }\n  },\n  {\n    \"name\": \"wall-6\",\n    \"position\": {\n      \"x\": 0,\n      \"y\": 0.9,\n      \"z\": 0\n    },\n    \"rotation\": {\n      \"x\": 0,\n      \"y\": 0,\n      \"z\": 0\n    },\n    \"scale\": {\n      \"x\": 1,\n      \"y\": 1,\n      \"z\": 1\n    }\n  },\n  {\n    \"name\": \"wall-7\",\n    \"position\": {\n      \"x\": -8.25,\n      \"y\": 0.9,\n      \"z\": 8.25\n    },\n    \"rotation\": {\n      \"x\": 0,\n      \"y\": 0,\n      \"z\": 0\n    },\n    \"scale\": {\n      \"x\": 1,\n      \"y\": 1,\n      \"z\": 1\n    }\n  },\n  {\n    \"name\": \"wall-8\",\n    \"position\": {\n      \"x\": 8.25,\n      \"y\": 0.9,\n      \"z\": -8.25\n    },\n    \"rotation\": {\n      \"x\": 0,\n      \"y\": 0,\n      \"z\": 0\n    },\n    \"scale\": {\n      \"x\": 1,\n      \"y\": 1,\n      \"z\": 1\n    }\n  },\n  {\n    \"name\": \"spawn-pad-9\",\n    \"position\": {\n      \"x\": 0,\n      \"y\": 0.08,\n      \"z\": -11.5\n    },\n    \"rotation\": {\n      \"x\": 0,\n      \"y\": 0,\n      \"z\": 0\n    },\n    \"scale\": {\n      \"x\": 1,\n      \"y\": 1,\n      \"z\": 1\n    }\n  },\n  {\n    \"name\": \"spawn-pad-10\",\n    \"position\": {\n      \"x\": 0,\n      \"y\": 0.08,\n      \"z\": 11.5\n    },\n    \"rotation\": {\n      \"x\": 0,\n      \"y\": 0,\n      \"z\": 0\n    },\n    \"scale\": {\n      \"x\": 1,\n      \"y\": 1,\n      \"z\": 1\n    }\n  },\n  {\n    \"name\": \"healing-base-11\",\n    \"position\": {\n      \"x\": -13.5,\n      \"y\": 0.12,\n      \"z\": -10.5\n    },\n    \"rotation\": {\n      \"x\": 0,\n      \"y\": 0,\n      \"z\": 0\n    },\n    \"scale\": {\n      \"x\": 1,\n      \"y\": 1,\n      \"z\": 1\n    }\n  },\n  {\n    \"name\": \"healing-pillar-12\",\n    \"position\": {\n      \"x\": -13.5,\n      \"y\": 1.05,\n      \"z\": -10.5\n    },\n    \"rotation\": {\n      \"x\": 0,\n      \"y\": 0,\n      \"z\": 0\n    },\n    \"scale\": {\n      \"x\": 1,\n      \"y\": 1,\n      \"z\": 1\n    }\n  },\n  {\n    \"name\": \"healing-base-13\",\n    \"position\": {\n      \"x\": 13.5,\n      \"y\": 0.12,\n      \"z\": 10.5\n    },\n    \"rotation\": {\n      \"x\": 0,\n      \"y\": 0,\n      \"z\": 0\n    },\n    \"scale\": {\n      \"x\": 1,\n      \"y\": 1,\n      \"z\": 1\n    }\n  },\n  {\n    \"name\": \"healing-pillar-14\",\n    \"position\": {\n      \"x\": 13.5,\n      \"y\": 1.05,\n      \"z\": 10.5\n    },\n    \"rotation\": {\n      \"x\": 0,\n      \"y\": 0,\n      \"z\": 0\n    },\n    \"scale\": {\n      \"x\": 1,\n      \"y\": 1,\n      \"z\": 1\n    }\n  },\n  {\n    \"name\": \"arena-boundary\",\n    \"position\": {\n      \"x\": 0,\n      \"y\": -0.6,\n      \"z\": 0\n    },\n    \"rotation\": {\n      \"x\": 0,\n      \"y\": 0,\n      \"z\": 0\n    },\n    \"scale\": {\n      \"x\": 1,\n      \"y\": 1,\n      \"z\": 1\n    }\n  },\n  {\n    \"name\": \"dummy-1\",\n    \"position\": {\n      \"x\": 5.8,\n      \"y\": 0,\n      \"z\": 1.6\n    },\n    \"rotation\": {\n      \"x\": 0,\n      \"y\": 0,\n      \"z\": 0\n    },\n    \"scale\": {\n      \"x\": 1,\n      \"y\": 1,\n      \"z\": 1\n    }\n  },\n  {\n    \"name\": \"dummy-2\",\n    \"position\": {\n      \"x\": -5.8,\n      \"y\": 0,\n      \"z\": 1.6\n    },\n    \"rotation\": {\n      \"x\": 0,\n      \"y\": 0,\n      \"z\": 0\n    },\n    \"scale\": {\n      \"x\": 1,\n      \"y\": 1,\n      \"z\": 1\n    }\n  },\n  {\n    \"name\": \"dummy-3\",\n    \"position\": {\n      \"x\": 0,\n      \"y\": 0,\n      \"z\": 5.2\n    },\n    \"rotation\": {\n      \"x\": 0,\n      \"y\": 0,\n      \"z\": 0\n    },\n    \"scale\": {\n      \"x\": 1,\n      \"y\": 1,\n      \"z\": 1\n    }\n  },\n  {\n    \"name\": \"dummy-4\",\n    \"position\": {\n      \"x\": -11.3,\n      \"y\": 1.75,\n      \"z\": 0\n    },\n    \"rotation\": {\n      \"x\": 0,\n      \"y\": 0,\n      \"z\": 0\n    },\n    \"scale\": {\n      \"x\": 1,\n      \"y\": 1,\n      \"z\": 1\n    }\n  },\n  {\n    \"name\": \"dummy-5\",\n    \"position\": {\n      \"x\": 11.3,\n      \"y\": 1.75,\n      \"z\": 0\n    },\n    \"rotation\": {\n      \"x\": 0,\n      \"y\": 0,\n      \"z\": 0\n    },\n    \"scale\": {\n      \"x\": 1,\n      \"y\": 1,\n      \"z\": 1\n    }\n  }\n]"
+    }
+  ]
+}

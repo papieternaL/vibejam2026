@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find /c/Users/steven/Desktop/vibejam2026/src -type f \\\\\\(-name *.ts -o -name *.tsx -o -name *.js -o -name *.jsx \\\\\\))",
+      "Bash(grep -r \"CylinderGeometry\\\\|ConeGeometry\\\\|SphereGeometry\" /c/Users/steven/Desktop/vibejam2026/src --include=*.ts --include=*.tsx)",
+      "Bash(npx tsc:*)"
+    ]
+  }
+}

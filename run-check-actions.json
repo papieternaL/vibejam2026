@@ -1,0 +1,6 @@
+{
+  "steps": [
+    { "buttons": ["up"], "frames": 18 },
+    { "buttons": [], "frames": 2 }
+  ]
+}
