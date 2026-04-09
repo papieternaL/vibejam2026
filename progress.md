@@ -85,6 +85,11 @@ Q/E combat-presentation polish:
 - Browser validation against `http://127.0.0.1:4173` using the shared `web_game_playwright_client.js` produced center, west-lane, and east-lane screenshots plus `render_game_to_text` snapshots.
 - Validation confirmed: `render_game_to_text()` reports 6 boost pads and 13 grapple anchors with stable ids/kinds; the center reads as an open teamfight pocket; the west lane exposes the broken walkway + pillar route; the east lane shows the staggered ledge chain and side-pad routing.
 - Edit-mode sanity check passed through `window.edit_mode_debug`: `F1` enables edit mode, 68 editable roots are registered/exported, and the export includes representative new objects such as `pillar-west-south`, `west-walkway-south`, and `east-high-pad`.
+
+GitHub Pages deployment:
+- Added `vite.config.ts` so production builds use `/vibejam2026/` as the base path during GitHub Actions while local dev still uses `/`.
+- Added `.github/workflows/deploy-pages.yml` to build on pushes to the `vibejam2026` branch and deploy `dist/` with the official Pages actions.
+- Verified the Pages-style build locally with `GITHUB_ACTIONS=true npm run build`.
 - Retuned `fireWheel` in `src/player/animation/HeroPoseConfig.ts` and `src/player/animation/CombatPresentationController.ts` to use a broader mirrored sweep with more torso twist, blade roll, and follow-through so it reads differently from the basic swing.
 - `src/player/animation/CombatPresentationController.ts` now mirrors `fireWheel` off `attackSide` the same way `swing` does, so repeated sweep usage no longer feels stuck to one generic side.
 - Added light body-spin presentation hooks in `src/player/PlayerCombatController.ts` for `vault` travel and `wheel` active so the torso/body carry the move instead of only the weapon moving.
