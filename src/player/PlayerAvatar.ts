@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { combatConfig } from '../config/combatConfig';
 import { HybridAnimationController } from './animation/HybridAnimationController';
 import type {
   HeroVisualRig,
@@ -436,6 +437,8 @@ export class PlayerAvatar {
 
   private updateChargeVisual(input: ProceduralAnimationInput): void {
     const charge = THREE.MathUtils.clamp(input.chargeRatio, 0, 1);
+    const drawReadyThreshold =
+      combatConfig.bow.charge.minimumDrawTime / Math.max(0.0001, combatConfig.bow.charge.fullChargeTime);
     if (charge <= 0.01) {
       this.chargeRing.visible = false;
       this.chargeArrowGhost.visible = false;
@@ -444,19 +447,24 @@ export class PlayerAvatar {
       return;
     }
 
+    const minimumDrawReached = charge >= drawReadyThreshold;
     const fullPulse = charge >= 1 ? 0.12 + (Math.sin(this.effectTime * 18) * 0.5 + 0.5) * 0.16 : 0;
     this.chargeRing.visible = true;
     this.chargeArrowGhost.visible = true;
-    this.chargeRingMaterial.opacity = 0.14 + charge * 0.28 + fullPulse;
-    this.chargeArrowMaterial.opacity = 0.16 + charge * 0.32 + fullPulse * 0.7;
-    this.chargeRing.scale.setScalar(0.72 + charge * 0.9 + fullPulse * 0.25);
+    this.chargeRingMaterial.color.setHex(minimumDrawReached ? 0xffefb2 : 0xffc58c);
+    this.chargeArrowMaterial.color.setHex(minimumDrawReached ? 0xf4fbff : 0xffdfa8);
+    this.chargeRingMaterial.opacity =
+      0.14 + charge * 0.24 + (minimumDrawReached ? 0.12 : 0) + fullPulse;
+    this.chargeArrowMaterial.opacity =
+      0.12 + charge * 0.24 + (minimumDrawReached ? 0.12 : 0) + fullPulse * 0.7;
+    this.chargeRing.scale.setScalar(0.72 + charge * 0.9 + (minimumDrawReached ? 0.12 : 0) + fullPulse * 0.25);
     this.chargeRing.rotation.z = this.effectTime * (1.4 + charge * 2.8);
     this.chargeArrowGhost.scale.set(
       1,
-      1 + charge * 0.25,
-      0.78 + charge * 0.95 + fullPulse * 0.18,
+      1 + charge * 0.2 + (minimumDrawReached ? 0.08 : 0),
+      0.72 + charge * 0.92 + (minimumDrawReached ? 0.12 : 0) + fullPulse * 0.18,
     );
-    this.chargeArrowGhost.position.z = 0.28 + charge * 0.22;
+    this.chargeArrowGhost.position.z = 0.26 + charge * 0.24 + (minimumDrawReached ? 0.04 : 0);
   }
 
   private updateWindVisual(input: ProceduralAnimationInput): void {

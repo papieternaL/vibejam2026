@@ -38,7 +38,8 @@ export class ArrowProjectile {
     this.previousPosition.copy(spawnPosition);
     this.velocity.copy(direction).normalize().multiplyScalar(options?.speed ?? combatConfig.bow.arrow.mid.speed);
     this.sourceTeam = sourceTeam;
-    this.gravity = options?.gravity ?? combatConfig.bow.arrow.gravityBase * combatConfig.bow.arrow.tap.gravityMultiplier;
+    this.gravity =
+      options?.gravity ?? combatConfig.bow.arrow.gravityBase * combatConfig.bow.arrow.minimum.gravityMultiplier;
     this.lifeRemaining = options?.lifetime ?? combatConfig.bow.arrow.mid.lifetime;
     const chargeRatio = THREE.MathUtils.clamp(options?.chargeRatio ?? 0, 0, 1);
 

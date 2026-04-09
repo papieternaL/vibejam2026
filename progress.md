@@ -90,6 +90,11 @@ GitHub Pages deployment:
 - Added `vite.config.ts` so production builds use `/vibejam2026/` as the base path during GitHub Actions while local dev still uses `/`.
 - Added `.github/workflows/deploy-pages.yml` to build on pushes to the `vibejam2026` branch and deploy `dist/` with the official Pages actions.
 - Verified the Pages-style build locally with `GITHUB_ACTIONS=true npm run build`.
+- Bow draw rework:
+- Replaced near-instant bow release behavior with a committed draw gate in `src/player/PlayerCombatController.ts`: LMB now starts draw, shots only release after `minimumDrawTime`, and early releases cancel without spawning an arrow.
+- Bow tuning now lives under clearer config names in `src/config/combatConfig.ts` with exposed `minimumDrawTime`, `fullChargeTime`, `movementSpeedMultiplier`, `minimum/mid/full` arrow speed, gravity multipliers, lifetimes, and minimum/full spread tuning.
+- Updated `src/ui/DebugHud.ts` and `src/player/PlayerAvatar.ts` so draw readability is clearer: `Drawing Bow`, `Draw Ready`, and `Full Charge` states show distinct bar messaging/colors and stronger charge-ring visuals after minimum draw and at full charge.
+- Validation: `npm run build` passes. Automated browser checks confirmed a true click-release (`hold-0`) spawns `0` arrows, a committed hold spawns `1`, full charge reaches `action: "Full Charge"` with `charge: 1`, and moving while drawing remains playable at about `14.78 m/s` from the configured `0.88` move multiplier.
 - Retuned `fireWheel` in `src/player/animation/HeroPoseConfig.ts` and `src/player/animation/CombatPresentationController.ts` to use a broader mirrored sweep with more torso twist, blade roll, and follow-through so it reads differently from the basic swing.
 - `src/player/animation/CombatPresentationController.ts` now mirrors `fireWheel` off `attackSide` the same way `swing` does, so repeated sweep usage no longer feels stuck to one generic side.
 - Added light body-spin presentation hooks in `src/player/PlayerCombatController.ts` for `vault` travel and `wheel` active so the torso/body carry the move instead of only the weapon moving.
@@ -348,4 +353,16 @@ Sunlit forest ruins arena pass:
   - Ran direct browser captures in `output/forest-ruins-direct-check`; `center-launch.png` / `center-air.png` show the central boost pad route reading clearly on screen.
 - Remaining caveat:
   - the central boost route is visually validated, but the side-pad launch still wants one quick manual browser feel pass. The pad is in a good readable lane position, but the headless movement route I used did not hit it cleanly enough to treat that launch as fully screenshot-verified.
+
+ElevenLabs SFX pipeline pass:
+- Added a config-driven runtime SFX layer with authored ids in `src/config/audioConfig.ts` and a lightweight `GameAudioManager` in `src/audio/GameAudioManager.ts`.
+- Hooked gameplay events into sound playback across ranged combat, locomotion, boost pads, projectile impacts, and world-spawned ability effects in `src/player/PlayerCombatController.ts`, `src/player/PlayerController.ts`, and `src/game/GameWorld.ts`.
+- Added an offline ElevenLabs generation workflow:
+  - `scripts/elevenlabs-sfx-prompts.json` stores prompt presets for current game actions
+  - `scripts/generate-elevenlabs-sfx.mjs` calls ElevenLabs sound generation and writes `.mp3` files into `public/audio/generated/`
+  - the generator now also refreshes `public/audio/generated/manifest.json`, and runtime audio only attempts clips listed in that manifest
+- Added setup docs in `.env.example`, `ELEVENLABS_SFX.md`, and `public/audio/generated/README.md`.
+- Validation target for this pass:
+  - `npm run build` should pass after the runtime/generator changes
+  - before real clips are generated, the game should stay silent cleanly instead of repeatedly requesting missing files
 

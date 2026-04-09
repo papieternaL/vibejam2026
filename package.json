@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "generate:sfx": "node scripts/generate-elevenlabs-sfx.mjs",
+    "generate:sfx:force": "node scripts/generate-elevenlabs-sfx.mjs --force"
   },
   "dependencies": {
     "three": "^0.180.0"

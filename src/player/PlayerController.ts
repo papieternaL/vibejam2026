@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import type { GameSfxId } from '../config/audioConfig';
 import { playerConfig } from '../config/playerConfig';
 import { combatConfig } from '../config/combatConfig';
 import { damp, dampAngle, moveTowards } from '../core/math';
@@ -65,6 +66,7 @@ export class PlayerController implements DamageableTarget {
   private readonly desiredFacingDirection = new THREE.Vector3(0, 0, 1);
   readonly position = new THREE.Vector3();
   private readonly combat = new PlayerCombatController();
+  private readonly sfxEvents: GameSfxId[] = [];
   private readonly headCenter = new THREE.Vector3();
   private readonly bodyCenter = new THREE.Vector3();
 
@@ -109,6 +111,7 @@ export class PlayerController implements DamageableTarget {
   }
 
   update(deltaSeconds: number, context: PlayerUpdateContext): void {
+    this.sfxEvents.length = 0;
     const wasGrounded = this.grounded;
     this.momentumJumpWindowTimer = Math.max(0, this.momentumJumpWindowTimer - deltaSeconds);
     this.momentumFeedbackTimer = Math.max(0, this.momentumFeedbackTimer - deltaSeconds);
@@ -168,6 +171,7 @@ export class PlayerController implements DamageableTarget {
       aimTarget: context.aimTarget,
       desiredMove,
     });
+    this.sfxEvents.push(...this.combat.consumeSfxEvents());
 
     if (!wasGrounded && this.lastCombatState.actionLabel === 'Dashing') {
       this.recentAirDashVelocity.set(
@@ -250,6 +254,7 @@ export class PlayerController implements DamageableTarget {
       }
       this.grounded = false;
       this.jumpHeldLatch = true;
+      this.sfxEvents.push('jump');
     } else {
       this.verticalVelocity -= combatConfig.movement.gravity * this.combat.getGravityScale() * deltaSeconds;
     }
@@ -284,6 +289,7 @@ export class PlayerController implements DamageableTarget {
         this.grounded = false;
         this.boostPadLockId = boostPadLaunch.id;
         this.boostPadFeedbackTimer = 0.18;
+        this.sfxEvents.push('boost-pad');
       }
     } else {
       this.boostPadLockId = null;
@@ -318,6 +324,7 @@ export class PlayerController implements DamageableTarget {
       }
       this.recentAirDashVelocity.set(0, 0, 0);
       this.hadAirDashSinceTakeoff = false;
+      this.sfxEvents.push('land');
     }
 
     const desiredFacingYaw =
@@ -441,6 +448,10 @@ export class PlayerController implements DamageableTarget {
       visualState: animationDebug.visualState,
       visualPhase: animationDebug.visualPhase,
     };
+  }
+
+  consumeSfxEvents(): GameSfxId[] {
+    return [...this.sfxEvents];
   }
 
   notifyProjectileHit(part: 'body' | 'head' | 'shield'): void {

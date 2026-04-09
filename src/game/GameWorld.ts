@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { GameAudioManager } from '../audio/GameAudioManager';
 import { round } from '../core/math';
 import { InputManager } from '../core/InputManager';
 import { DummyTarget } from '../entities/DummyTarget';
@@ -25,6 +26,7 @@ export class GameWorld {
   private readonly player: PlayerController;
   private readonly cameraRig: ThirdPersonCameraRig;
   private readonly hud: DebugHud;
+  private readonly audio: GameAudioManager;
   private readonly renderer: THREE.WebGLRenderer;
   private readonly input: InputManager;
   private readonly dummies: DummyTarget[];
@@ -48,6 +50,7 @@ export class GameWorld {
     this.player = new PlayerController(this.scene, this.arena.getSpawnPoint());
     this.cameraRig = new ThirdPersonCameraRig(this.player.getFacingYaw());
     this.hud = new DebugHud(overlayParent);
+    this.audio = new GameAudioManager();
     this.dummies = this.createDummyTargets();
   }
 
@@ -70,6 +73,9 @@ export class GameWorld {
       aimTarget,
       world: this.createWorldSpawnApi(),
     });
+    for (const sfxId of this.player.consumeSfxEvents()) {
+      this.audio.play(sfxId);
+    }
 
     for (const dummy of this.dummies) {
       dummy.update(deltaSeconds);
@@ -237,9 +243,11 @@ export class GameWorld {
       },
       spawnBurnZone: (position, directionYaw) => {
         this.burnZones.push(new BurnZone(this.scene, position.clone(), directionYaw));
+        this.audio.play('burn-zone');
       },
       spawnDragonWave: (position, directionYaw) => {
         this.dragonWaves.push(new DragonWave(this.scene, position.clone(), directionYaw));
+        this.audio.play('dragon-wave');
       },
       spawnHitPulse: (position, color, size) => {
         this.hitPulses.push(new HitPulse(this.scene, position.clone(), color, size));
@@ -253,6 +261,7 @@ export class GameWorld {
             combatConfig.feedback.abilityFlashColors.vault,
           ),
         );
+        this.audio.play('vault-impact');
       },
       spawnRoarBurst: (position, radius) => {
         this.roarBursts.push(
@@ -263,6 +272,7 @@ export class GameWorld {
             combatConfig.feedback.abilityFlashColors.wheel,
           ),
         );
+        this.audio.play('roar-burst');
       },
     };
   }
@@ -304,6 +314,13 @@ export class GameWorld {
 
       if (impact?.hit) {
         this.player.notifyProjectileHit(impact.part);
+        if (impact.part === 'head') {
+          this.audio.play('arrow-hit-head');
+        } else if (impact.part === 'shield') {
+          this.audio.play('arrow-hit-shield');
+        } else {
+          this.audio.play('arrow-hit-body');
+        }
         this.hitPulses.push(
           new HitPulse(
             this.scene,

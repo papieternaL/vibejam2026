@@ -1,0 +1,116 @@
+[
+  {
+    "id": "bow-draw-start",
+    "prompt": "short wooden bow string pullback start, close perspective, tight tension, clean game sound effect, no voice, no ambience",
+    "durationSeconds": 1.2,
+    "promptInfluence": 0.45
+  },
+  {
+    "id": "bow-draw-ready",
+    "prompt": "subtle bow string tension click when an archer reaches firing draw, crisp and readable game ui cue, no ambience",
+    "durationSeconds": 1.0,
+    "promptInfluence": 0.45
+  },
+  {
+    "id": "bow-full-charge",
+    "prompt": "soft magical archer full charge shimmer layered over a taut bow string peak, short fantasy game sound effect, no voice",
+    "durationSeconds": 1.5,
+    "promptInfluence": 0.55
+  },
+  {
+    "id": "bow-release-light",
+    "prompt": "light bow release and arrow launch, crisp string snap with airy projectile whoosh, stylized fantasy game sound effect",
+    "durationSeconds": 1.4,
+    "promptInfluence": 0.5
+  },
+  {
+    "id": "bow-release-full",
+    "prompt": "powerful fully drawn bow release, taut string crack and forceful arrow whoosh, satisfying fantasy action game sound effect",
+    "durationSeconds": 1.6,
+    "promptInfluence": 0.55
+  },
+  {
+    "id": "bow-draw-cancel",
+    "prompt": "soft aborted bow draw release, small string slack sound, subtle and clean fantasy game ui cue",
+    "durationSeconds": 1.0,
+    "promptInfluence": 0.4
+  },
+  {
+    "id": "jump",
+    "prompt": "quick agile fantasy hero jump, light boot push and airy lift, clean gameplay sound effect",
+    "durationSeconds": 1.1,
+    "promptInfluence": 0.45
+  },
+  {
+    "id": "land",
+    "prompt": "medium fantasy hero landing on stone and dirt, readable foot impact with slight body weight, clean gameplay sound effect",
+    "durationSeconds": 1.2,
+    "promptInfluence": 0.45
+  },
+  {
+    "id": "dash",
+    "prompt": "fast fantasy combat dash burst, compressed air sweep with sharp movement accent, clean action game sound effect",
+    "durationSeconds": 1.1,
+    "promptInfluence": 0.5
+  },
+  {
+    "id": "wind-launch",
+    "prompt": "wind powered upward launch burst, airy magical lift with forceful gust, fantasy combat game sound effect",
+    "durationSeconds": 1.4,
+    "promptInfluence": 0.5
+  },
+  {
+    "id": "shield-up",
+    "prompt": "short magical wind shield activation, airy protective shimmer and concise energy bloom, fantasy game sound effect",
+    "durationSeconds": 1.2,
+    "promptInfluence": 0.5
+  },
+  {
+    "id": "boost-pad",
+    "prompt": "jump pad or wind boost pad launch, bright upward energy burst with air thrust, clean arcade fantasy game sound effect",
+    "durationSeconds": 1.3,
+    "promptInfluence": 0.52
+  },
+  {
+    "id": "arrow-hit-body",
+    "prompt": "arrow impact into armor and flesh, short punchy hit with readable thud, stylized fantasy game sound effect",
+    "durationSeconds": 1.0,
+    "promptInfluence": 0.5
+  },
+  {
+    "id": "arrow-hit-head",
+    "prompt": "precise critical arrow headshot impact, sharper puncture and stronger hit confirmation, stylized fantasy game sound effect",
+    "durationSeconds": 1.0,
+    "promptInfluence": 0.55
+  },
+  {
+    "id": "arrow-hit-shield",
+    "prompt": "arrow impact on magical shield, bright deflect shimmer with clean energy ping, fantasy game sound effect",
+    "durationSeconds": 1.0,
+    "promptInfluence": 0.5
+  },
+  {
+    "id": "burn-zone",
+    "prompt": "short fiery ground ignition, magical flame burst spreading across stone, fantasy ability sound effect",
+    "durationSeconds": 1.5,
+    "promptInfluence": 0.52
+  },
+  {
+    "id": "dragon-wave",
+    "prompt": "dragon fire wave cast, short magical draconic flame surge with pressure and heat, fantasy ultimate sound effect",
+    "durationSeconds": 1.7,
+    "promptInfluence": 0.55
+  },
+  {
+    "id": "vault-impact",
+    "prompt": "heavy fantasy aerial slam impact on stone, strong downward shockwave and dusty burst, action game sound effect",
+    "durationSeconds": 1.6,
+    "promptInfluence": 0.55
+  },
+  {
+    "id": "roar-burst",
+    "prompt": "radial fiery roar burst, explosive circular flame pulse with pressure and force, fantasy action game sound effect",
+    "durationSeconds": 1.6,
+    "promptInfluence": 0.55
+  }
+]

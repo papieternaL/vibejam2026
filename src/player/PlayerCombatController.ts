@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import type { GameSfxId } from '../config/audioConfig';
 import { combatConfig } from '../config/combatConfig';
 import { InputManager } from '../core/InputManager';
 import type { WorldSpawnApi } from '../game/combatTypes';
@@ -41,6 +42,7 @@ type CombatPresentation = {
 
 export class PlayerCombatController {
   private static readonly launchBurstSeconds = 0.1;
+  private static readonly drawCancelFeedbackSeconds = 0.12;
   private readonly impulseVelocity = new THREE.Vector3();
   private readonly dashDirection = new THREE.Vector3();
   private readonly shotDirection = new THREE.Vector3();
@@ -62,17 +64,24 @@ export class PlayerCombatController {
   private screenShake = 0;
   private firedThisFrame = false;
   private fireFeedbackTimer = 0;
+  private drawCancelledTimer = 0;
   private lastFiredChargeRatio = 0;
   private launchVerticalImpulse: number | null = null;
   private chargeTimer = 0;
   private chargingShot = false;
+  private drawProgressRatio = 0;
   private shotChargeRatio = 0;
   private airDashesRemaining: number = combatConfig.dash.airDashCount;
+  private readonly sfxEvents: GameSfxId[] = [];
 
   update(context: CombatUpdateContext): CombatPresentation {
+    this.sfxEvents.length = 0;
     this.firedThisFrame = false;
     this.launchVerticalImpulse = null;
-    this.shotChargeRatio = 0;
+    if (!this.chargingShot) {
+      this.drawProgressRatio = 0;
+      this.shotChargeRatio = 0;
+    }
 
     for (const key of Object.keys(this.cooldowns)) {
       this.cooldowns[key] = Math.max(0, this.cooldowns[key] - context.deltaSeconds);
@@ -84,6 +93,7 @@ export class PlayerCombatController {
     this.shieldFlashTimer = Math.max(0, this.shieldFlashTimer - context.deltaSeconds);
     this.slowFallTimer = Math.max(0, this.slowFallTimer - context.deltaSeconds);
     this.fireFeedbackTimer = Math.max(0, this.fireFeedbackTimer - context.deltaSeconds);
+    this.drawCancelledTimer = Math.max(0, this.drawCancelledTimer - context.deltaSeconds);
     this.hitConfirmTimer = Math.max(0, this.hitConfirmTimer - context.deltaSeconds);
     this.screenShake = Math.max(0, this.screenShake - context.deltaSeconds * combatConfig.camera.shakeDamping);
 
@@ -112,6 +122,7 @@ export class PlayerCombatController {
       this.cooldowns.dash <= 0 &&
       (context.grounded || this.airDashesRemaining > 0)
     ) {
+      this.sfxEvents.push('dash');
       this.dashDirection.copy(horizontalMoveDirection);
       if (this.dashDirection.lengthSq() < 0.0001) {
         this.dashDirection.set(cameraForward3D.x, 0, cameraForward3D.z);
@@ -138,6 +149,7 @@ export class PlayerCombatController {
     }
 
     if (context.input.wasPressed('engage') && this.cooldowns.launch <= 0) {
+      this.sfxEvents.push('wind-launch');
       this.impulseVelocity.addScaledVector(facingDirection, combatConfig.launch.forwardSpeed);
       this.launchVerticalImpulse = combatConfig.launch.upwardSpeed;
       this.launchTimer = PlayerCombatController.launchBurstSeconds;
@@ -148,6 +160,7 @@ export class PlayerCombatController {
     }
 
     if (context.input.wasPressed('sweep') && this.cooldowns.shield <= 0 && this.shieldTimer <= 0) {
+      this.sfxEvents.push('shield-up');
       this.shieldTimer = combatConfig.shield.duration;
       this.cooldowns.shield = combatConfig.shield.cooldown;
       this.shieldFlashTimer = combatConfig.shield.hitFlashSeconds * 0.6;
@@ -156,62 +169,91 @@ export class PlayerCombatController {
     if (context.input.wasPressed('basicAttack') && this.cooldowns.fire <= 0 && !this.chargingShot) {
       this.chargingShot = true;
       this.chargeTimer = 0;
+      this.drawProgressRatio = 0;
+      this.shotChargeRatio = 0;
+      this.sfxEvents.push('bow-draw-start');
     }
 
     if (this.chargingShot && context.input.isDown('basicAttack')) {
+      const hadMinimumDraw = this.chargeTimer >= combatConfig.bow.charge.minimumDrawTime;
+      const hadFullCharge = this.drawProgressRatio >= 1;
       this.chargeTimer += context.deltaSeconds;
+      this.drawProgressRatio = THREE.MathUtils.clamp(
+        this.chargeTimer / Math.max(0.0001, combatConfig.bow.charge.fullChargeTime),
+        0,
+        1,
+      );
       this.shotChargeRatio = THREE.MathUtils.clamp(
-        (this.chargeTimer - combatConfig.bow.charge.minReleaseTime) /
+        (this.chargeTimer - combatConfig.bow.charge.minimumDrawTime) /
           Math.max(
             0.0001,
-            combatConfig.bow.charge.fullChargeTime - combatConfig.bow.charge.minReleaseTime,
+            combatConfig.bow.charge.fullChargeTime - combatConfig.bow.charge.minimumDrawTime,
           ),
         0,
         1,
       );
+      if (!hadMinimumDraw && this.chargeTimer >= combatConfig.bow.charge.minimumDrawTime) {
+        this.sfxEvents.push('bow-draw-ready');
+      }
+      if (!hadFullCharge && this.drawProgressRatio >= 1) {
+        this.sfxEvents.push('bow-full-charge');
+      }
     }
 
     if (this.chargingShot && context.input.wasReleased('basicAttack')) {
-      this.shotDirection.copy(context.aimTarget).sub(context.projectileSpawnOrigin);
-      if (this.shotDirection.lengthSq() < 0.0001) {
-        this.shotDirection.copy(facingDirection);
-      } else {
-        this.shotDirection.normalize();
-      }
-
-      const speed = this.sampleChargeSpeed(this.shotChargeRatio);
-      const gravity = this.sampleChargeGravity(this.shotChargeRatio);
-      const lifetime = this.sampleChargeLifetime(this.shotChargeRatio);
-      const spread = THREE.MathUtils.lerp(
-        combatConfig.bow.arrow.tapSpreadRadians,
-        combatConfig.bow.arrow.fullSpreadRadians,
-        THREE.MathUtils.smoothstep(this.shotChargeRatio, 0, 1),
-      );
-      if (spread > 0.0001) {
-        this.spreadAxis.set(0, 1, 0).applyAxisAngle(this.shotDirection, Math.PI * 0.5);
-        if (this.spreadAxis.lengthSq() < 0.0001) {
-          this.spreadAxis.set(1, 0, 0);
+      if (this.chargeTimer >= combatConfig.bow.charge.minimumDrawTime) {
+        this.shotDirection.copy(context.aimTarget).sub(context.projectileSpawnOrigin);
+        if (this.shotDirection.lengthSq() < 0.0001) {
+          this.shotDirection.copy(facingDirection);
+        } else {
+          this.shotDirection.normalize();
         }
-        this.spreadAxis.normalize();
-        this.shotDirection.applyAxisAngle(this.spreadAxis, spread);
+
+        const speed = this.sampleChargeSpeed(this.shotChargeRatio);
+        const gravity = this.sampleChargeGravity(this.shotChargeRatio);
+        const lifetime = this.sampleChargeLifetime(this.shotChargeRatio);
+        const spread = THREE.MathUtils.lerp(
+          combatConfig.bow.arrow.minimumSpreadRadians,
+          combatConfig.bow.arrow.fullSpreadRadians,
+          THREE.MathUtils.smoothstep(this.shotChargeRatio, 0, 1),
+        );
+        if (spread > 0.0001) {
+          this.spreadAxis.set(0, 1, 0).applyAxisAngle(this.shotDirection, Math.PI * 0.5);
+          if (this.spreadAxis.lengthSq() < 0.0001) {
+            this.spreadAxis.set(1, 0, 0);
+          }
+          this.spreadAxis.normalize();
+          this.shotDirection.applyAxisAngle(this.spreadAxis, spread);
+        }
+
+        context.world.spawnArrow(context.projectileSpawnOrigin.clone(), this.shotDirection, 'hero', {
+          speed,
+          lifetime,
+          gravity,
+          chargeRatio: this.shotChargeRatio,
+        });
+        this.cooldowns.fire = combatConfig.bow.arrow.fireInterval;
+        this.firedThisFrame = true;
+        this.fireFeedbackTimer = 0.12;
+        this.lastFiredChargeRatio = this.shotChargeRatio;
+        this.sfxEvents.push(this.shotChargeRatio >= 0.8 ? 'bow-release-full' : 'bow-release-light');
+        this.screenShake = Math.max(
+          this.screenShake,
+          THREE.MathUtils.lerp(
+            combatConfig.feedback.lightShake * 0.24,
+            combatConfig.feedback.lightShake * 0.62,
+            this.shotChargeRatio,
+          ),
+        );
+      } else {
+        this.drawCancelledTimer = PlayerCombatController.drawCancelFeedbackSeconds;
+        this.sfxEvents.push('bow-draw-cancel');
       }
 
-      context.world.spawnArrow(context.projectileSpawnOrigin.clone(), this.shotDirection, 'hero', {
-        speed,
-        lifetime,
-        gravity,
-        chargeRatio: this.shotChargeRatio,
-      });
-      this.cooldowns.fire = combatConfig.bow.arrow.fireInterval;
-      this.firedThisFrame = true;
-      this.fireFeedbackTimer = 0.12;
-      this.lastFiredChargeRatio = this.shotChargeRatio;
-      this.screenShake = Math.max(
-        this.screenShake,
-        THREE.MathUtils.lerp(combatConfig.feedback.lightShake * 0.22, combatConfig.feedback.lightShake * 0.55, this.shotChargeRatio),
-      );
       this.chargingShot = false;
       this.chargeTimer = 0;
+      this.drawProgressRatio = 0;
+      this.shotChargeRatio = 0;
     }
 
     const impulseDrag =
@@ -252,9 +294,13 @@ export class PlayerCombatController {
     return { ...this.cooldowns };
   }
 
+  consumeSfxEvents(): GameSfxId[] {
+    return [...this.sfxEvents];
+  }
+
   getFireCooldownRatio(): number {
     if (this.chargingShot) {
-      return this.shotChargeRatio;
+      return this.drawProgressRatio;
     }
     return this.cooldowns.fire / Math.max(0.0001, combatConfig.bow.arrow.fireInterval);
   }
@@ -277,8 +323,11 @@ export class PlayerCombatController {
     const shieldActive = this.shieldTimer > 0;
     const slowFalling = this.slowFallTimer > 0;
     const fireFeedbackActive = this.fireFeedbackTimer > 0;
+    const drawCancelled = this.drawCancelledTimer > 0;
+    const minimumDrawReached =
+      this.chargingShot && this.chargeTimer >= combatConfig.bow.charge.minimumDrawTime;
     const fullDrawPulse =
-      this.chargingShot && this.shotChargeRatio >= 1
+      this.chargingShot && this.drawProgressRatio >= 1
         ? 0.08 + (Math.sin(this.chargeTimer * 20) * 0.5 + 0.5) * 0.08
         : 0;
     const movementPhaseProgress = dashing
@@ -288,20 +337,25 @@ export class PlayerCombatController {
         : 0;
 
     return {
-      moveScale: this.chargingShot ? combatConfig.bow.arrow.movementSlowScale : 1,
+      moveScale: this.chargingShot ? combatConfig.bow.charge.movementSpeedMultiplier : 1,
       extraVelocity: this.impulseVelocity.clone(),
       desiredFacingYaw:
         dashing || launching || this.firedThisFrame || this.chargingShot ? context.cameraYaw : null,
       turnSharpness: combatConfig.movement.aimTurnSharpness,
       attackWeight: 0,
       attackSide: 1,
-      chargeRatio: this.shotChargeRatio,
+      chargeRatio: this.drawProgressRatio,
       visualLift: launching ? 0.66 : slowFalling ? 0.54 : 0,
       spinRate: 0,
       actionTint: fireFeedbackActive
-        ? THREE.MathUtils.lerp(0.14, 0.36, this.lastFiredChargeRatio)
+        ? THREE.MathUtils.lerp(0.16, 0.4, this.lastFiredChargeRatio)
         : this.chargingShot
-          ? 0.08 + this.shotChargeRatio * 0.22 + fullDrawPulse
+          ? 0.08 +
+            this.drawProgressRatio * 0.18 +
+            (minimumDrawReached ? 0.08 : 0) +
+            fullDrawPulse
+          : drawCancelled
+            ? 0.1
           : shieldActive
             ? 0.08
             : launching
@@ -311,22 +365,26 @@ export class PlayerCombatController {
                 : 0,
       cameraMode: dashing || launching || slowFalling || this.chargingShot ? 'combat' : 'normal',
       screenShake: this.screenShake,
-      actionLabel: shieldActive
+      actionLabel: drawCancelled
+        ? 'Draw Cancelled'
+        : shieldActive
         ? 'Wind Shield'
         : launching
           ? 'Wind Burst'
           : slowFalling
             ? 'Slow Fall'
           : this.chargingShot
-            ? this.shotChargeRatio >= 1
-              ? 'Full Draw'
-              : 'Charging Shot'
+            ? this.drawProgressRatio >= 1
+              ? 'Full Charge'
+              : minimumDrawReached
+                ? 'Draw Ready'
+                : 'Drawing Bow'
           : dashing
             ? 'Dashing'
             : fireFeedbackActive
               ? this.lastFiredChargeRatio >= 0.8
-                ? 'Precision Shot'
-                : 'Quick Shot'
+                ? 'Full Release'
+                : 'Bow Release'
               : 'Ready',
       visualState: dashing || launching || slowFalling ? 'fastMove' : 'idle',
       visualPhase: dashing || launching ? 'active' : slowFalling ? 'travel' : 'loop',
@@ -348,7 +406,7 @@ export class PlayerCombatController {
   private sampleChargeSpeed(chargeRatio: number): number {
     if (chargeRatio <= 0.5) {
       return THREE.MathUtils.lerp(
-        combatConfig.bow.arrow.tap.speed,
+        combatConfig.bow.arrow.minimum.speed,
         combatConfig.bow.arrow.mid.speed,
         chargeRatio / 0.5,
       );
@@ -367,7 +425,7 @@ export class PlayerCombatController {
       return (
         baseGravity *
         THREE.MathUtils.lerp(
-          combatConfig.bow.arrow.tap.gravityMultiplier,
+          combatConfig.bow.arrow.minimum.gravityMultiplier,
           combatConfig.bow.arrow.mid.gravityMultiplier,
           chargeRatio / 0.5,
         )
@@ -387,7 +445,7 @@ export class PlayerCombatController {
   private sampleChargeLifetime(chargeRatio: number): number {
     if (chargeRatio <= 0.5) {
       return THREE.MathUtils.lerp(
-        combatConfig.bow.arrow.tap.lifetime,
+        combatConfig.bow.arrow.minimum.lifetime,
         combatConfig.bow.arrow.mid.lifetime,
         chargeRatio / 0.5,
       );

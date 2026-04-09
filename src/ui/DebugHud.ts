@@ -77,15 +77,24 @@ export class DebugHud {
     actionText.textContent = `State: ${state.actionLabel}`;
     chargeFill.style.width = `${state.chargeRatio * 100}%`;
     const charging =
-      state.actionLabel === 'Charging Shot' || state.actionLabel === 'Full Draw';
-    const fullDrawReady = state.actionLabel === 'Full Draw';
+      state.actionLabel === 'Drawing Bow' ||
+      state.actionLabel === 'Draw Ready' ||
+      state.actionLabel === 'Full Charge';
+    const drawReady = state.actionLabel === 'Draw Ready';
+    const fullDrawReady = state.actionLabel === 'Full Charge';
     chargeFill.style.background = fullDrawReady
       ? 'linear-gradient(90deg, rgba(202, 247, 255, 0.95), rgba(123, 226, 255, 1))'
+      : drawReady
+        ? 'linear-gradient(90deg, rgba(255, 236, 165, 0.95), rgba(255, 196, 92, 1))'
       : 'linear-gradient(90deg, rgba(255, 205, 142, 0.95), rgba(255, 163, 89, 1))';
     chargeText.textContent = charging
       ? fullDrawReady
-        ? 'Full draw ready'
-        : `Charge ${Math.round(state.chargeRatio * 100)}%`
+        ? 'Full charge ready'
+        : drawReady
+          ? 'Minimum draw reached'
+          : `Drawing ${Math.round(state.chargeRatio * 100)}%`
+      : state.actionLabel === 'Draw Cancelled'
+        ? 'Draw released too early'
       : state.chargeRatio > 0
         ? `Arrow cooldown ${Math.round(state.chargeRatio * 100)}%`
         : 'Arrow ready';
